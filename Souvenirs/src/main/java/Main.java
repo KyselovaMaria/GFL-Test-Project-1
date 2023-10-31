@@ -106,6 +106,9 @@ public class Main {
                             .findFirst()
                             .orElse(null);
                     if (editedSouvenir != null) {
+                        System.out.println("Enter the ID of the manufacturer:");
+                        String manufacturerIdInput_2 = scanner.nextLine();
+                        UUID manufacturerId_2 = UUID.fromString(manufacturerIdInput_2);
                         System.out.println("Введіть нову назву сувеніру:");
                         name = scanner.nextLine();
                         System.out.println("Введіть назву виробника:");
@@ -118,18 +121,22 @@ public class Main {
                         System.out.println("Введіть нову ціну:");
                         price = scanner.nextDouble();
                         Souvenir newEditedSouvenir = new Souvenir(name, newManufacturer, releaseDate, price);
-                        souvenirFacade.editSouvenir(oldName, newEditedSouvenir);
+                        souvenirFacade.editSouvenir(oldName, manufacturerId_2, newEditedSouvenir);
                         System.out.println("Сувенір відредаговано.");
                     } else {
                         System.out.println("Сувенір не знайдено.");
                     }
                     break;
+
                 case 3:
                     // Видалення сувеніру
                     System.out.println("Введіть назву сувеніру, який ви хочете видалити:");
                     String souvenirToDelete = scanner.nextLine();
-                    souvenirFacade.deleteSouvenir(souvenirToDelete);
-                    System.out.println("Сувенір видалено.");
+                    System.out.println("Enter the ID of the manufacturer to delete:");
+                    String manufacturerIdInput_3 = scanner.nextLine();
+                    UUID manufacturerId_3 = UUID.fromString(manufacturerIdInput_3);
+                    souvenirFacade.deleteSouvenir(souvenirToDelete,manufacturerId_3);
+                    System.out.println("Сувенір видалено, якщо за такою інформацією він існував.");
                     break;
 
                 case 4:

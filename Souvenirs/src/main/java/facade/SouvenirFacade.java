@@ -19,12 +19,12 @@ public class SouvenirFacade {
         souvenirService.addSouvenir(souvenir);
     }
 
-    public void editSouvenir(String oldName, Souvenir newSouvenir) {
-        souvenirService.editSouvenir(oldName, newSouvenir);
+    public void editSouvenir(String oldName, UUID manufacturerId, Souvenir newSouvenir) {
+        souvenirService.editSouvenir(oldName, manufacturerId, newSouvenir);
     }
 
-    public void deleteSouvenir(String name) {
-        souvenirService.deleteSouvenir(name);
+    public void deleteSouvenir(String name, UUID manufacturerId) {
+        souvenirService.deleteSouvenir(name, manufacturerId);
     }
 
     public void addManufacturer(Manufacturer manufacturer) {

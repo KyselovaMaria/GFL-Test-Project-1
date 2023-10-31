@@ -24,15 +24,28 @@ public class SouvenirService {
         souvenirs.add(souvenir);
     }
 
-    public void editSouvenir(String oldName, Souvenir newSouvenir) {
+    public void editSouvenir(String oldName, UUID manufacturerId, Souvenir newSouvenir) {
         souvenirs = souvenirs.stream()
-                .map(s -> s.getName().equals(oldName) ? newSouvenir : s)
+                .map(souvenir -> {
+                    if (souvenir.getName().equals(oldName) && souvenir.getManufacturer().getId().equals(manufacturerId)) {
+                        return newSouvenir;
+                    } else {
+                        return souvenir;
+                    }
+                })
                 .collect(Collectors.toList());
     }
 
-    public void deleteSouvenir(String name) {
-        souvenirs.removeIf(souvenir -> souvenir.getName().equals(name));
+
+    //public void deleteSouvenir(String name) {
+    //    souvenirs.removeIf(souvenir -> souvenir.getName().equals(name));
+    //}
+
+    public void deleteSouvenir(String souvenirName, UUID manufacturerId) {
+        souvenirs.removeIf(souvenir -> souvenir.getName().equals(souvenirName) &&
+                souvenir.getManufacturer().getId().equals(manufacturerId));
     }
+
 
     public void addManufacturer(Manufacturer manufacturer) {
         manufacturers.add(manufacturer);
